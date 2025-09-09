@@ -1,0 +1,16 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "funnel"
+version = "0.1.0"
+description = "DSL filter parsers for dict/MongoDB/SQLAlchemy; AST-compiled predicate for dicts."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "SQLAlchemy>=2.0",
+    "asyncpg>=0.29",
+    "motor>=3.5",
+    "pyparsing>=3.1",
+]

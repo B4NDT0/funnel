@@ -1,13 +1,10 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy import select
 
-from parser.dict_data import DictFilterParser
 from parser.mongodb import MongoDbFilterParser
 import motor.motor_asyncio
-import asyncio
-from actions import Action
 from parser.sqlalchemy import SqlAlchemyFilterParser
-from parser.py_ast_dict import DictASTFilterParser
+from src.funnel.parser.py_ast_dict import DictASTFilterParser
 
 # Connect to MongoDB
 client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://localhost:27017")
@@ -28,16 +25,6 @@ async def fetch_documents():
     for doc in documents:
         print(doc)
 
-
-async def fetch_records():
-    parser = SqlAlchemyFilterParser(Action)
-
-    async with session_maker() as session:
-        query = await session.execute(parser.add_filter("type eq 'TRANSFER'", select(Action)))
-        result = query.unique().scalars()
-
-        for record in result:
-            print(record.name)
 
 def fetch_items():
     items = [
